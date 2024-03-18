@@ -1,15 +1,40 @@
+# POST http://localhost:8080/auth/owner/signup
+# Content-Type: application/json
+
+# {
+#   "username": "owner 2",
+#   "password": "ownerpassword",
+#   "role": "OWNER"
+# }
+
 # POST http://localhost:8080/auth/owner/signin
 # Content-Type: application/json
 
 # {
-#   "username": "owner",
+#   "username": "owner 2",
 #   "password": "ownerpassword"
 # }
 
-POST http://localhost:8080/auth/signin
+# POST http://localhost:8080/auth/signin
+# Content-Type: application/json
+
+# {
+#   "username": "tenant",
+#   "password": "ownerpassword"
+# }
+
+
+POST http://localhost:8080/api/property/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
 
 {
-  "username": "tenant",
-  "password": "ownerpassword"
+  "name": "Beautiful House for owner 2",
+  "description": "A spacious and modern apartment",
+  "type": "Residential",
+  "size": 200.5,
+  "location": "City Center",
+  "price": 500000.0,
+  "propertyImageUrl": "https://example.com/image.jpg",
+  "propertyType": "COMMERCIAL"
 }
