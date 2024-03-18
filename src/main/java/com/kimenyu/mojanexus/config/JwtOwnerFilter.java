@@ -1,8 +1,10 @@
 package com.kimenyu.mojanexus.config;
 
 
-import com.kimenyu.mojanexus.service.JWTUtils;
-import com.kimenyu.mojanexus.service.OurUserDetailsService;
+
+import com.kimenyu.mojanexus.service.JWTUtilsOwner;
+import com.kimenyu.mojanexus.service.OwnerDetailService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,13 +21,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-public class JWTAuthFIlter extends OncePerRequestFilter {
+public class JwtOwnerFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JWTUtils jwtUtils;
+    private JWTUtilsOwner jwtUtils;
     
     @Autowired
-    private OurUserDetailsService ourUserDetailsService;
+    private OwnerDetailService ourUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

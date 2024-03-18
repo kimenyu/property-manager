@@ -21,10 +21,15 @@ public class Property {
     private Double size;
     private String location;
     private Double price;
+    private String propertyImageUrl;
 
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
 
-    @OneToMany(mappedBy = "property")
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Apartment> apartments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 }

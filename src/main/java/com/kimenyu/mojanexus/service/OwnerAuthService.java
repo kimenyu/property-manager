@@ -7,9 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kimenyu.mojanexus.dto.ReqRes;
+import com.kimenyu.mojanexus.dto.ReqResOwner;
 import com.kimenyu.mojanexus.entity.Owner;
-import com.kimenyu.mojanexus.entity.User;
 import com.kimenyu.mojanexus.repository.OwnerRepository;
 
 import java.util.HashMap;
@@ -19,15 +18,18 @@ public class OwnerAuthService {
 
     @Autowired
     private OwnerRepository ownerRepo;
+    
     @Autowired
-    private JWTUtils jwtUtils;
+    private JWTUtilsOwner jwtUtils;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public ReqRes register(ReqRes registrationRequest){
-        ReqRes resp = new ReqRes();
+    public ReqResOwner register(ReqResOwner registrationRequest){
+        ReqResOwner resp = new ReqResOwner();
         try {
             Owner ourUsers = new Owner();
             ourUsers.setUsername(registrationRequest.getUsername());
@@ -46,8 +48,8 @@ public class OwnerAuthService {
         return resp;
     }
 
-    public ReqRes login(ReqRes signinRequest){
-        ReqRes response = new ReqRes();
+    public ReqResOwner login(ReqResOwner signinRequest){
+        ReqResOwner response = new ReqResOwner();
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getUsername(),signinRequest.getPassword()));
@@ -67,8 +69,8 @@ public class OwnerAuthService {
         return response;
     }
 
-    public ReqRes ownerrefreshToken(ReqRes refreshTokenReqiest){
-        ReqRes response = new ReqRes();
+    public ReqResOwner ownerrefreshToken(ReqResOwner refreshTokenReqiest){
+        ReqResOwner response = new ReqResOwner();
         String username = jwtUtils.extractUsername(refreshTokenReqiest.getToken());
         Owner users = ownerRepo.findByUsername(username);
         if (jwtUtils.isTokenValid(refreshTokenReqiest.getToken(), users)) {

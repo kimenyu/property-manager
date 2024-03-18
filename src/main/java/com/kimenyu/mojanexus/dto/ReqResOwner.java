@@ -3,7 +3,7 @@ package com.kimenyu.mojanexus.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.kimenyu.mojanexus.entity.User;
+import com.kimenyu.mojanexus.entity.Owner;
 import com.kimenyu.mojanexus.enums.Role;
 
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ReqRes {
+public class ReqResOwner {
 
     private int statusCode;
     private String error;
@@ -25,5 +25,6 @@ public class ReqRes {
     private String email;
     private Role role;
     private String password;
-    private User ourUsers;
+    private Owner ourOwners;
 }
+

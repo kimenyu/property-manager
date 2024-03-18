@@ -1,5 +1,7 @@
 package com.kimenyu.mojanexus.entity;
 
+import java.util.List;
+
 import com.kimenyu.mojanexus.enums.ApartmentType;
 
 import jakarta.persistence.*;
@@ -15,8 +17,12 @@ public class Apartment {
     private ApartmentType apartmentType;
     private Double size;
     private Double price;
+    private String apartmentImageUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id")
     private Property property;
+
+    @OneToMany(mappedBy = "apartment")
+    private List<Lease> leases;
 }

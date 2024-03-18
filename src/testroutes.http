@@ -1,7 +1,15 @@
+# POST http://localhost:8080/auth/owner/signin
+# Content-Type: application/json
+
+# {
+#   "username": "owner",
+#   "password": "ownerpassword"
+# }
+
 POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
-  "username": "owner",
+  "username": "tenant",
   "password": "ownerpassword"
 }

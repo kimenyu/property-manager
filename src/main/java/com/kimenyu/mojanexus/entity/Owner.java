@@ -26,10 +26,9 @@ public class Owner implements UserDetails {
     private String lastName;
     private String email;
     private String phoneNumber;
+    
     @OneToMany(mappedBy = "owner")
     private List<Property> properties;
-    @OneToMany(mappedBy = "owner")
-    private List<Apartment> apartments;
     
     @Enumerated(EnumType.STRING)
     private Role role;

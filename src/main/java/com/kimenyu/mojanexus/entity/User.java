@@ -25,6 +25,7 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apartment_id", nullable = true)
     private Apartment apartment;
