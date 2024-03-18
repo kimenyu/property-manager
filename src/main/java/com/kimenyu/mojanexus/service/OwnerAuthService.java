@@ -1,5 +1,6 @@
 package com.kimenyu.mojanexus.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -7,16 +8,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kimenyu.mojanexus.dto.ReqRes;
+import com.kimenyu.mojanexus.entity.Owner;
 import com.kimenyu.mojanexus.entity.User;
-import com.kimenyu.mojanexus.repository.UserRepository;
+import com.kimenyu.mojanexus.repository.OwnerRepository;
 
 import java.util.HashMap;
 
 @Service
-public class AuthService {
+public class OwnerAuthService {
 
     @Autowired
-    private UserRepository ourUserRepo;
+    private OwnerRepository ownerRepo;
     @Autowired
     private JWTUtils jwtUtils;
     @Autowired
@@ -24,17 +26,17 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public ReqRes signUp(ReqRes registrationRequest){
+    public ReqRes register(ReqRes registrationRequest){
         ReqRes resp = new ReqRes();
         try {
-            User ourUsers = new User();
+            Owner ourUsers = new Owner();
             ourUsers.setUsername(registrationRequest.getUsername());
             ourUsers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             ourUsers.setRole(registrationRequest.getRole());
-            User ourUserResult = ourUserRepo.save(ourUsers);
+            Owner ourUserResult = ownerRepo.save(ourUsers);
             if (ourUserResult != null && ourUserResult.getId()>0) {
-                resp.setOurUsers(ourUserResult);
-                resp.setMessage("Tenant Saved Successfully");
+                resp.setOurOwners(ourUserResult);
+                resp.setMessage("Owner Saved Successfully");
                 resp.setStatusCode(201);
             }
         }catch (Exception e){
@@ -44,20 +46,20 @@ public class AuthService {
         return resp;
     }
 
-    public ReqRes signIn(ReqRes signinRequest){
+    public ReqRes login(ReqRes signinRequest){
         ReqRes response = new ReqRes();
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getUsername(),signinRequest.getPassword()));
-            var user = ourUserRepo.findByUsername(signinRequest.getUsername());
-            System.out.println("Tenant IS: "+ user);
+            var user = ownerRepo.findByUsername(signinRequest.getUsername());
+            System.out.println("USER IS: "+ user);
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
             response.setStatusCode(200);
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);
             response.setExpirationTime("24Hr");
-            response.setMessage("Tenant Successfully Signed In");
+            response.setMessage("Owner successfully Signed In");
         }catch (Exception e){
             response.setStatusCode(500);
             response.setError(e.getMessage());
@@ -65,17 +67,17 @@ public class AuthService {
         return response;
     }
 
-    public ReqRes refreshToken(ReqRes refreshTokenReqiest){
+    public ReqRes ownerrefreshToken(ReqRes refreshTokenReqiest){
         ReqRes response = new ReqRes();
         String username = jwtUtils.extractUsername(refreshTokenReqiest.getToken());
-        User users = ourUserRepo.findByUsername(username);
+        Owner users = ownerRepo.findByUsername(username);
         if (jwtUtils.isTokenValid(refreshTokenReqiest.getToken(), users)) {
             var jwt = jwtUtils.generateToken(users);
             response.setStatusCode(200);
             response.setToken(jwt);
             response.setRefreshToken(refreshTokenReqiest.getToken());
             response.setExpirationTime("24Hr");
-            response.setMessage("Tenant successfully Refreshed Token");
+            response.setMessage("Owner Successfully Refreshed Token");
         }
         response.setStatusCode(500);
         return response;

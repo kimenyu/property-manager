@@ -3,15 +3,14 @@ package com.kimenyu.mojanexus.config;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.kimenyu.mojanexus.enums.Role;
+import com.kimenyu.mojanexus.enums.PropertyType;
 
 import java.io.IOException;
 
-public class RoleDeserializer extends JsonDeserializer<Role> {
+public class PropertyTypeDeserializer extends JsonDeserializer<PropertyType> {
     @Override
-    public Role deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public PropertyType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         String value = p.getValueAsString();
-        return Role.valueOf(value.toUpperCase()); // Assuming your enum constants are uppercase
+        return PropertyType.valueOf(value.toUpperCase());
     }
 }
-

@@ -2,6 +2,7 @@ package com.kimenyu.mojanexus.entity;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,21 +15,22 @@ import lombok.Data;
 
 @Data
 @Entity
-public class User implements UserDetails {
+public class Owner implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
     private String password;
-
     private String firstName;
     private String lastName;
+    private String email;
     private String phoneNumber;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "apartment_id", nullable = true)
-    private Apartment apartment;
-
+    @OneToMany(mappedBy = "owner")
+    private List<Property> properties;
+    @OneToMany(mappedBy = "owner")
+    private List<Apartment> apartments;
+    
     @Enumerated(EnumType.STRING)
     private Role role;
 

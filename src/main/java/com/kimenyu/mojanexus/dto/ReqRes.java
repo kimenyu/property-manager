@@ -3,8 +3,9 @@ package com.kimenyu.mojanexus.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.kimenyu.mojanexus.entity.Role;
+import com.kimenyu.mojanexus.entity.Owner;
 import com.kimenyu.mojanexus.entity.User;
+import com.kimenyu.mojanexus.enums.Role;
 
 import lombok.Data;
 
@@ -26,4 +27,5 @@ public class ReqRes {
     private Role role;
     private String password;
     private User ourUsers;
+    private Owner ourOwners;
 }
