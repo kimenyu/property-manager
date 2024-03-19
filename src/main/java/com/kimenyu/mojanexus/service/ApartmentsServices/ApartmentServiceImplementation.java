@@ -46,6 +46,21 @@ public class ApartmentServiceImplementation implements ApartmentService{
         // Save the apartment
         return apartmentRepository.save(apartment);
     }
+
+    @Override
+    public List<Apartment> listApartmentsByOwner(String username) {
+Owner owner = ownerRepository.findByUsername(username);
+        if (owner == null) {
+            throw new RuntimeException("Owner not found with username: " + username);
+        }
+    
+        return apartmentRepository.findByPropertyOwner(owner);
+    }
+
+    @Override
+    public List<Apartment> listAllApartments() {
+        return apartmentRepository.findAll();
+    }
     
 
 }

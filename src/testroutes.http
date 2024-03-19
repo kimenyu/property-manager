@@ -61,6 +61,11 @@
 # Content-Type: application/json
 # Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
 
-GET http://localhost:8080/api/property/list/my-properties
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
+# GET http://localhost:8080/api/property/list/my-properties
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
+
+
+# GET http://localhost:8080/api/apartment/all/list
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
