@@ -15,4 +15,6 @@ public interface OwnerPropertyService {
 
     Property updatePropertyById(Long id, PropertyDto propertyDto, String username);
 
+    void deletePropertyById(Long id, String authenticatedOwnerUsername);
+
 }

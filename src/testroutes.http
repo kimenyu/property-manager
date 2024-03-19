@@ -23,21 +23,25 @@
 #   "password": "ownerpassword"
 # }
 
+# DELETE http://localhost:8080/api/property/delete/property/3
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
 
-PUT http://localhost:8080/api/property/update/property/3
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
 
-{
-  "name": "House for owner 2 updated",
-  "description": "A spacious and modern apartment",
-  "type": "Residential",
-  "size": 200.5,
-  "location": "City Center updated",
-  "price": 500000.0,
-  "propertyImageUrl": "https://example.com/image.jpg",
-  "propertyType": "RESIDENTIAL"
-}
+# PUT http://localhost:8080/api/property/update/property/3
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
+
+# {
+#   "name": "House for owner 2 updated",
+#   "description": "A spacious and modern apartment",
+#   "type": "Residential",
+#   "size": 200.5,
+#   "location": "City Center updated",
+#   "price": 500000.0,
+#   "propertyImageUrl": "https://example.com/image.jpg",
+#   "propertyType": "RESIDENTIAL"
+# }
 
 # GET http://localhost:8080/api/property/list/all-properties
 # Content-Type: application/json

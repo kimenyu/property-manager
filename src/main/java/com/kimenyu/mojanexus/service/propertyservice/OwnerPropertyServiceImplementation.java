@@ -78,4 +78,20 @@ public class OwnerPropertyServiceImplementation implements OwnerPropertyService{
         return propertyRepository.save(existingProperty);
     }
 
+    @Override
+    public void deletePropertyById(Long id, String username) {
+        // Find the property by ID
+        Property existingProperty = propertyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Property not found with id: " + id));
+
+        // Check if the authenticated owner matches the property's owner
+        Owner owner = ownerRepository.findByUsername(username);
+        if (!existingProperty.getOwner().equals(owner)) {
+            throw new RuntimeException("You are not authorized to delete this property");
+        }
+
+        // Delete the property
+        propertyRepository.delete(existingProperty);
+    }
+
 }
