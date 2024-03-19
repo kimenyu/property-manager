@@ -1,5 +1,7 @@
 package com.kimenyu.mojanexus.service.propertyservice;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,22 @@ public class OwnerPropertyServiceImplementation implements OwnerPropertyService{
 
         // Save the property to the database
         return propertyRepository.save(property);
+    }
+
+    @Override
+    public List<Property> listPropertiesByOwner(String username) {
+        Owner owner = ownerRepository.findByUsername(username);
+        if (owner == null) {
+            throw new RuntimeException("Owner not found with username: " + username);
+        }
+
+        return propertyRepository.findByOwner(owner);
+    }
+
+
+    @Override
+    public List<Property> listAllProperties() {
+        return propertyRepository.findAll();
     }
 
 }
