@@ -13,4 +13,6 @@ public interface OwnerPropertyService {
 
     List<Property> listAllProperties();
 
+    Property updatePropertyById(Long id, PropertyDto propertyDto, String username);
+
 }

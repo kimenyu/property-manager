@@ -53,4 +53,29 @@ public class OwnerPropertyServiceImplementation implements OwnerPropertyService{
         return propertyRepository.findAll();
     }
 
+    @Override
+    public Property updatePropertyById(Long id, PropertyDto propertyDto, String username) {
+        // Find the property by ID
+        Property existingProperty = propertyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Property not found with id: " + id));
+
+        // Check if the authenticated owner matches the property's owner
+        Owner owner = ownerRepository.findByUsername(username);
+        if (!existingProperty.getOwner().equals(owner)) {
+            throw new RuntimeException("You are not authorized to update this property");
+        }
+
+        // Update the property with new data from PropertyDto
+        existingProperty.setName(propertyDto.getName());
+        existingProperty.setDescription(propertyDto.getDescription());
+        existingProperty.setPrice(propertyDto.getPrice());
+        existingProperty.setLocation(propertyDto.getLocation());
+        existingProperty.setSize(propertyDto.getSize());
+        existingProperty.setPropertyType(propertyDto.getPropertyType());
+        existingProperty.setPropertyImageUrl(propertyDto.getPropertyImageUrl());
+        existingProperty.setType(propertyDto.getType());
+        // Save the updated property
+        return propertyRepository.save(existingProperty);
+    }
+
 }

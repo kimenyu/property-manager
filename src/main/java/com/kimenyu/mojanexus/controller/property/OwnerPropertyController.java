@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +30,7 @@ public class OwnerPropertyController {
     public ResponseEntity<Property> createProperty(@RequestBody PropertyDto propertyDto) {
         // Get the currently authenticated owner
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String authenticatedOwnerUsername = authentication.getName(); // Assuming username is used for identification
+        String authenticatedOwnerUsername = authentication.getName();
 
         // Set the owner username in the property DTO
         propertyDto.setName(authenticatedOwnerUsername);
@@ -42,7 +44,7 @@ public class OwnerPropertyController {
     public ResponseEntity<List<Property>> listMyProperties() {
         // Get the currently authenticated owner's username
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String authenticatedOwnerUsername = authentication.getName(); // Assuming username is used for identification
+        String authenticatedOwnerUsername = authentication.getName();
 
         // List the properties for the authenticated owner using the PropertyService
         List<Property> properties = ownerPropertyService.listPropertiesByOwner(authenticatedOwnerUsername);
@@ -55,5 +57,18 @@ public class OwnerPropertyController {
         List<Property> properties = ownerPropertyService.listAllProperties();
         return ResponseEntity.ok(properties);
     }
+
+    @PutMapping("/update/property/{id}")
+    public ResponseEntity<Property> updatePropertyById(@PathVariable Long id, @RequestBody PropertyDto propertyDto) {
+        // Get the currently authenticated owner's username
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String authenticatedOwnerUsername = authentication.getName();
+
+        // Update the property by ID for the authenticated owner
+        Property updatedProperty = ownerPropertyService.updatePropertyById(id, propertyDto, authenticatedOwnerUsername);
+        
+        return ResponseEntity.ok(updatedProperty);
+    }
+
 
 }
