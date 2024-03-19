@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,5 +58,18 @@ public class ApartmentController {
     public ResponseEntity<Apartment> updateApartmentById(@PathVariable Long id, @RequestBody ApartmentDto apartmentDto) {
         Apartment updatedApartment = apartmentService.updateApartmentById(id, apartmentDto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedApartment);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteApartmentById(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String authenticatedOwnerUsername = authentication.getName();
+
+        boolean deleted = apartmentService.deleteApartmentById(id, authenticatedOwnerUsername);
+        if (deleted) {
+            return ResponseEntity.status(HttpStatus.OK).body("Apartment deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not authorized to delete this apartment");
+        }
     }
 }

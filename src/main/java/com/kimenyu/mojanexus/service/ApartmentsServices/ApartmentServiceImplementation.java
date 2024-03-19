@@ -79,6 +79,22 @@ Owner owner = ownerRepository.findByUsername(username);
             throw new RuntimeException("Apartment not found with ID: " + id);
         }
     }
+
+    @Override
+    public boolean deleteApartmentById(Long id, String username) {
+        Optional<Apartment> optionalApartment = apartmentRepository.findById(id);
+        if (optionalApartment.isPresent()) {
+            Apartment existingApartment = optionalApartment.get();
+            if (existingApartment.getProperty().getOwner().getUsername().equals(ownerRepository.findByUsername(username).getUsername())) {
+                apartmentRepository.delete(existingApartment);
+                return true;
+            } else {
+                throw new RuntimeException("Authenticated owner does not have permission to delete this apartment.");
+            }
+        } else {
+            throw new RuntimeException("Apartment not found with ID: " + id);
+        }
+    }
     
 
 }

@@ -16,4 +16,6 @@ public interface ApartmentService {
 
     Apartment updateApartmentById(Long id, ApartmentDto apartmentDto);
 
+    boolean deleteApartmentById(Long id, String authenticatedOwnerUsername);
+
 }

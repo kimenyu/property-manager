@@ -42,7 +42,7 @@
 #   "propertyType": "RESIDENTIAL"
 # }
 
-PUT http://localhost:8080/api/apartment/update/apartment/1
+POST http://localhost:8080/api/apartment/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
 
@@ -55,6 +55,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzM
   "propertyId": 1,
   "isAvailable" : false
 }
+
+# DELETE http://localhost:8080/api/apartment/delete/1
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
 
 
 # GET http://localhost:8080/api/property/list/all-properties
