@@ -22,6 +22,8 @@ public class Property {
     private String location;
     private Double price;
     private String propertyImageUrl;
+    private String propertyVideoUrl;
+    private Number numberOfApartments;
 
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;

@@ -42,19 +42,19 @@
 #   "propertyType": "RESIDENTIAL"
 # }
 
-POST http://localhost:8080/api/apartment/create
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
+# POST http://localhost:8080/api/apartment/create
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
 
 
-{
-  "apartmentType": "ONE_BEDROOM",
-  "size": 50.0,
-  "price": 17500.0,
-  "apartmentImageUrl": "https://example.com/image.jpg",
-  "propertyId": 1,
-  "isAvailable" : false
-}
+# {
+#   "apartmentType": "ONE_BEDROOM",
+#   "size": 50.0,
+#   "price": 17500.0,
+#   "apartmentImageUrl": "https://example.com/image.jpg",
+#   "propertyId": 1,
+#   "isAvailable" : false
+# }
 
 # DELETE http://localhost:8080/api/apartment/delete/1
 # Content-Type: application/json

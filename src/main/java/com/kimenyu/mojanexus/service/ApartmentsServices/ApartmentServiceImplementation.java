@@ -70,8 +70,9 @@ Owner owner = ownerRepository.findByUsername(username);
             Apartment existingApartment = optionalApartment.get();
             existingApartment.setApartmentType(apartmentDto.getApartmentType());
             existingApartment.setSize(apartmentDto.getSize());
-            existingApartment.setPrice(apartmentDto.getPrice());
+            existingApartment.setRent(apartmentDto.getRent());
             existingApartment.setApartmentImageUrl(apartmentDto.getApartmentImageUrl());
+            existingApartment.setApartmentVideoUrl(apartmentDto.getApartmentVideoUrl());
             existingApartment.setIsAvailable(apartmentDto.getIsAvailable());
 
             return apartmentRepository.save(existingApartment);

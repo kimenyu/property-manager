@@ -19,6 +19,8 @@ public class PropertyDto {
     private String location;
     private Double price;
     private String propertyImageUrl;
+    private String propertyVideoUrl;
+    private Number numberOfApartments;
     private PropertyType propertyType;
     private List<Apartment> apartments;
 
