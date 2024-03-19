@@ -2,7 +2,7 @@
 # Content-Type: application/json
 
 # {
-#   "username": "owner 2",
+#   "username": "owner",
 #   "password": "ownerpassword",
 #   "role": "OWNER"
 # }
@@ -11,7 +11,7 @@
 # Content-Type: application/json
 
 # {
-#   "username": "owner 2",
+#   "username": "owner",
 #   "password": "ownerpassword"
 # }
 
@@ -28,14 +28,13 @@
 # Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
 
 
-# PUT http://localhost:8080/api/property/update/property/3
+# POST http://localhost:8080/api/property/create
 # Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
 
 # {
-#   "name": "House for owner 2 updated",
+#   "name": "House for owner",
 #   "description": "A spacious and modern apartment",
-#   "type": "Residential",
 #   "size": 200.5,
 #   "location": "City Center updated",
 #   "price": 500000.0,
@@ -43,10 +42,25 @@
 #   "propertyType": "RESIDENTIAL"
 # }
 
+# POST http://localhost:8080/api/apartment/create
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI
+
+
+# {
+#   "apartmentType": "STUDIO",
+#   "size": 50.0,
+#   "price": 1000.0,
+#   "apartmentImageUrl": "https://example.com/image.jpg",
+#   "propertyId": 1,
+#   "isAvailable" : true
+# }
+
+
 # GET http://localhost:8080/api/property/list/all-properties
 # Content-Type: application/json
 # Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
 
-# GET http://localhost:8080/api/property/list/my-properties
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciAyIiwiaWF0IjoxNzEwNzg4MzUyLCJleHAiOjE3MTA4NzQ3NTJ9.cdTbZlLD-8mS1pZSfHgqkaYaXOoxJiKUCmW_a_SN-Lo
+GET http://localhost:8080/api/property/list/my-properties
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDgzMjcwNSwiZXhwIjoxNzEwOTE5MTA1fQ.n2fcV_K_j9u8FDs2EALjTyMflZ6fe58aGeMHUFZ0VzI

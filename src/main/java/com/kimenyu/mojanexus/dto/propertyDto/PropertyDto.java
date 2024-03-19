@@ -15,7 +15,6 @@ public class PropertyDto {
     private Long id;
     private String name;
     private String description;
-    private String type;
     private Double size;
     private String location;
     private Double price;

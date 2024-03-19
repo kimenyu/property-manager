@@ -73,8 +73,6 @@ public class OwnerPropertyServiceImplementation implements OwnerPropertyService{
         existingProperty.setSize(propertyDto.getSize());
         existingProperty.setPropertyType(propertyDto.getPropertyType());
         existingProperty.setPropertyImageUrl(propertyDto.getPropertyImageUrl());
-        existingProperty.setType(propertyDto.getType());
-        // Save the updated property
         return propertyRepository.save(existingProperty);
     }
 
