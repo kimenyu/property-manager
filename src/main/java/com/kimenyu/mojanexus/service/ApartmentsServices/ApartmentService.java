@@ -14,4 +14,6 @@ public interface ApartmentService {
 
     List<Apartment> listAllApartments();
 
+    Apartment updateApartmentById(Long id, ApartmentDto apartmentDto);
+
 }

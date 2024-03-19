@@ -1,6 +1,7 @@
 package com.kimenyu.mojanexus.service.ApartmentsServices;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,23 @@ Owner owner = ownerRepository.findByUsername(username);
     @Override
     public List<Apartment> listAllApartments() {
         return apartmentRepository.findAll();
+    }
+
+    @Override
+    public Apartment updateApartmentById(Long id, ApartmentDto apartmentDto) {
+        Optional<Apartment> optionalApartment = apartmentRepository.findById(id);
+        if (optionalApartment.isPresent()) {
+            Apartment existingApartment = optionalApartment.get();
+            existingApartment.setApartmentType(apartmentDto.getApartmentType());
+            existingApartment.setSize(apartmentDto.getSize());
+            existingApartment.setPrice(apartmentDto.getPrice());
+            existingApartment.setApartmentImageUrl(apartmentDto.getApartmentImageUrl());
+            existingApartment.setIsAvailable(apartmentDto.getIsAvailable());
+
+            return apartmentRepository.save(existingApartment);
+        } else {
+            throw new RuntimeException("Apartment not found with ID: " + id);
+        }
     }
     
 

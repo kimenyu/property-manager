@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +38,7 @@ public class ApartmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdApartment);
     }
 
-     @GetMapping("/owner/list")
+     @GetMapping("/owner/list/my-apartments")
     public ResponseEntity<List<Apartment>> listApartmentsByOwner() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String authenticatedUsername = authentication.getName(); // Assuming username is used for identification
@@ -49,5 +51,11 @@ public class ApartmentController {
     public ResponseEntity<List<Apartment>> listAllApartments() {
         List<Apartment> apartments = apartmentService.listAllApartments();
         return ResponseEntity.status(HttpStatus.OK).body(apartments);
+    }
+
+    @PutMapping("/update/apartment/{id}")
+    public ResponseEntity<Apartment> updateApartmentById(@PathVariable Long id, @RequestBody ApartmentDto apartmentDto) {
+        Apartment updatedApartment = apartmentService.updateApartmentById(id, apartmentDto);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedApartment);
     }
 }
