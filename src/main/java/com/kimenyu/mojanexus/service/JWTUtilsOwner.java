@@ -50,8 +50,15 @@ public class JWTUtilsOwner {
         return claimsTFunction.apply(Jwts.parser().verifyWith(Key).build().parseSignedClaims(token).getPayload());
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails){
+    public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
+    
+        // Check if the userDetails object is null
+        if (userDetails == null) {
+            throw new IllegalArgumentException("UserDetails object cannot be null");
+        }
+    
+        // Check if the username from the token matches the username from the userDetails object
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
     public boolean isTokenExpired(String token){

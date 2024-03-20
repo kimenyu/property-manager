@@ -1,11 +1,10 @@
 package com.kimenyu.mojanexus.entity;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import java.time.LocalDate;
 
-@Data
 @Entity
 public class Lease {
     @Id
@@ -40,83 +39,239 @@ public class Lease {
     private Double electricityFee;
     private Double otherFee;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apartment_id")
+    @JsonIgnore
     private Apartment apartment;
 
     private String leaseImageUrl;
     private String leasePdfUrl;
 
-    public void calculateTotalRent() {
-        // Calculate total rent based on apartment rent, garbage fees, electricity fees, water fees, and other charges
-        totalRent = apartment.getRent() + garbageFee + electricityFee + waterFee + otherFee;
+    // Constructors, getters, setters
+
+    @Override
+    public String toString() {
+        return "Lease{" +
+                "id=" + id +
+                ", property=" + property +
+                ", user=" + user +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", totalRent=" + totalRent +
+                ", deposit=" + deposit +
+                ", rentPaid=" + rentPaid +
+                ", depositPaid=" + depositPaid +
+                ", isPaid=" + isPaid +
+                ", isDepositPaid=" + isDepositPaid +
+                ", isTerminated=" + isTerminated +
+                ", isDepositReturned=" + isDepositReturned +
+                ", isRentReturned=" + isRentReturned +
+                ", isDepositReturnedToTenant=" + isDepositReturnedToTenant +
+                ", isRentReturnedToTenant=" + isRentReturnedToTenant +
+                ", isDepositReturnedToOwner=" + isDepositReturnedToOwner +
+                ", garbageFee=" + garbageFee +
+                ", waterFee=" + waterFee +
+                ", electricityFee=" + electricityFee +
+                ", otherFee=" + otherFee +
+                ", apartment=" + apartment +
+                ", leaseImageUrl='" + leaseImageUrl + '\'' +
+                ", leasePdfUrl='" + leasePdfUrl + '\'' +
+                '}';
     }
 
-    public Double getBalance() {
-        return totalRent - rentPaid;
+    public Long getId() {
+        return id;
     }
 
-
-    public void payRent(Double amount) {
-        rentPaid += amount;
-        if (rentPaid >= totalRent) {
-            isPaid = true;
-        }
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void payDeposit(Double amount) {
-        depositPaid += amount;
-        if (depositPaid >= deposit) {
-            isDepositPaid = true;
-        }
+    public Property getProperty() {
+        return property;
     }
 
-    public void terminateLease() {
-        isTerminated = true;
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
-    public void returnDepositToTenant() {
-        isDepositReturnedToTenant = true;
+    public User getUser() {
+        return user;
     }
 
-    public void returnRentToTenant() {
-        isRentReturnedToTenant = true;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void returnDepositToOwner() {
-        isDepositReturnedToOwner = true;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void returnRentToOwner() {
-        isRentReturned = true;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public void returnDeposit() {
-        isDepositReturned = true;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void returnRent() {
-        isRentReturned = true;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    public boolean isLeaseActive() {
-        return !isTerminated && LocalDate.now().isBefore(endDate);
+    public Double getTotalRent() {
+        return totalRent;
     }
 
-    public boolean isLeaseExpired() {
-        return LocalDate.now().isAfter(endDate);
+    public void setTotalRent(Double totalRent) {
+        this.totalRent = totalRent;
     }
 
-    public boolean isDepositReturned() {
+    public Double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(Double deposit) {
+        this.deposit = deposit;
+    }
+
+    public Double getRentPaid() {
+        return rentPaid;
+    }
+
+    public void setRentPaid(Double rentPaid) {
+        this.rentPaid = rentPaid;
+    }
+
+    public Double getDepositPaid() {
+        return depositPaid;
+    }
+
+    public void setDepositPaid(Double depositPaid) {
+        this.depositPaid = depositPaid;
+    }
+
+    public Boolean getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    public Boolean getIsDepositPaid() {
+        return isDepositPaid;
+    }
+
+    public void setIsDepositPaid(Boolean isDepositPaid) {
+        this.isDepositPaid = isDepositPaid;
+    }
+
+    public Boolean getIsTerminated() {
+        return isTerminated;
+    }
+
+    public void setIsTerminated(Boolean isTerminated) {
+        this.isTerminated = isTerminated;
+    }
+
+    public Boolean getIsDepositReturned() {
         return isDepositReturned;
     }
 
-    public boolean isRentReturned() {
+    public void setIsDepositReturned(Boolean isDepositReturned) {
+        this.isDepositReturned = isDepositReturned;
+    }
+
+    public Boolean getIsRentReturned() {
         return isRentReturned;
     }
 
-    public boolean isDepositReturnedToTenant() {
+    public void setIsRentReturned(Boolean isRentReturned) {
+        this.isRentReturned = isRentReturned;
+    }
+
+    public Boolean getIsDepositReturnedToTenant() {
         return isDepositReturnedToTenant;
+    }
+
+    public void setIsDepositReturnedToTenant(Boolean isDepositReturnedToTenant) {
+        this.isDepositReturnedToTenant = isDepositReturnedToTenant;
+    }
+
+    public Boolean getIsRentReturnedToTenant() {
+        return isRentReturnedToTenant;
+    }
+
+    public void setIsRentReturnedToTenant(Boolean isRentReturnedToTenant) {
+        this.isRentReturnedToTenant = isRentReturnedToTenant;
+    }
+
+    public Boolean getIsDepositReturnedToOwner() {
+        return isDepositReturnedToOwner;
+    }
+
+    public void setIsDepositReturnedToOwner(Boolean isDepositReturnedToOwner) {
+        this.isDepositReturnedToOwner = isDepositReturnedToOwner;
+    }
+
+    public Double getGarbageFee() {
+        return garbageFee;
+    }
+
+    public void setGarbageFee(Double garbageFee) {
+        this.garbageFee = garbageFee;
+    }
+
+    public Double getWaterFee() {
+        return waterFee;
+    }
+
+    public void setWaterFee(Double waterFee) {
+        this.waterFee = waterFee;
+    }
+
+    public Double getElectricityFee() {
+        return electricityFee;
+    }
+
+    public void setElectricityFee(Double electricityFee) {
+        this.electricityFee = electricityFee;
+    }
+
+    public Double getOtherFee() {
+        return otherFee;
+    }
+
+    public void setOtherFee(Double otherFee) {
+        this.otherFee = otherFee;
+    }
+
+    public Apartment getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
+    }
+
+    public String getLeaseImageUrl() {
+        return leaseImageUrl;
+    }
+
+    public void setLeaseImageUrl(String leaseImageUrl) {
+        this.leaseImageUrl = leaseImageUrl;
+    }
+
+    public String getLeasePdfUrl() {
+        return leasePdfUrl;
+    }
+
+    public void setLeasePdfUrl(String leasePdfUrl) {
+        this.leasePdfUrl = leasePdfUrl;
+    }
+
+    public void calculateTotalRent() {
+        this.totalRent = this.totalRent + this.garbageFee + this.waterFee + this.electricityFee + this.otherFee;
     }
 }

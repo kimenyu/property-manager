@@ -62,6 +62,8 @@ public class OwnerAuthService {
             response.setRefreshToken(refreshToken);
             response.setExpirationTime("24Hr");
             response.setMessage("Owner successfully Signed In");
+            System.out.println(jwt);
+            System.out.println(response);
         }catch (Exception e){
             response.setStatusCode(500);
             response.setError(e.getMessage());

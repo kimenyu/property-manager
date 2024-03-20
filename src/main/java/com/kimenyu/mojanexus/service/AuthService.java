@@ -32,7 +32,7 @@ public class AuthService {
             ourUsers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             ourUsers.setRole(registrationRequest.getRole());
             User ourUserResult = ourUserRepo.save(ourUsers);
-            if (ourUserResult != null && ourUserResult.getId()>0) {
+            if (ourUserResult != null && ourUserResult.getTenantId()>0) {
                 resp.setOurUsers(ourUserResult);
                 resp.setMessage("Tenant Saved Successfully");
                 resp.setStatusCode(201);
@@ -58,6 +58,11 @@ public class AuthService {
             response.setRefreshToken(refreshToken);
             response.setExpirationTime("24Hr");
             response.setMessage("Tenant Successfully Signed In");
+            System.out.println("Tenant Successfully Signed In");
+            System.out.println(response);
+            System.out.println("................");
+            System.out.println(jwt);
+            System.out.println("................");
         }catch (Exception e){
             response.setStatusCode(500);
             response.setError(e.getMessage());

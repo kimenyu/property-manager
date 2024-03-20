@@ -1,16 +1,18 @@
 package com.kimenyu.mojanexus.entity;
 
-
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kimenyu.mojanexus.enums.PropertyType;
+import lombok.Data;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import java.util.List;
 
 @Data
 @Entity
+@ToString(exclude = "apartments")
+@Accessors(chain = true)
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +35,24 @@ public class Property {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-
     @JsonIgnore
     private Owner owner;
+
+    // Constructors, getters, setters
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "propertyId=" + propertyId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", size=" + size +
+                ", location='" + location + '\'' +
+                ", price=" + price +
+                ", propertyImageUrl='" + propertyImageUrl + '\'' +
+                ", propertyVideoUrl='" + propertyVideoUrl + '\'' +
+                ", numberOfApartments=" + numberOfApartments +
+                ", propertyType=" + propertyType +
+                '}';
+    }
 }
