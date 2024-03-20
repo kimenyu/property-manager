@@ -1,5 +1,6 @@
 // package com.kimenyu.mojanexus.config;
 
+// import com.kimenyu.mojanexus.service.CustomUserDetailsService;
 // import com.kimenyu.mojanexus.service.OurUserDetailsService;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.context.annotation.Bean;
@@ -23,13 +24,13 @@
 // public class SecurityConfig {
 
 //     @Autowired
-//     private OurUserDetailsService ourUserDetailsService;
+//     private CustomUserDetailsService customUserDetailsService;
 
 //     @Autowired
-//     private JWTAuthFIlter jwtAuthFIlter;
+//     private JWTAuthFIlter jwUser;
 
 //     @Bean
-//     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//     public SecurityFilterChain UsersecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 //         httpSecurity.csrf(AbstractHttpConfigurer::disable)
 //                 .cors(Customizer.withDefaults())
 //                 .authorizeHttpRequests(request -> request.requestMatchers("/auth/**", "/public/**", "/list-blogs/**").permitAll()
@@ -40,7 +41,7 @@
 //                         .anyRequest().authenticated())
 //                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 //                 .authenticationProvider(authenticationProvider()).addFilterBefore(
-//                         jwtAuthFIlter, UsernamePasswordAuthenticationFilter.class
+//                         jwUser, UsernamePasswordAuthenticationFilter.class
 //                 );
 //         return httpSecurity.build();
 //     }
@@ -48,7 +49,7 @@
 //     @Bean
 //     public AuthenticationProvider authenticationProvider() {
 //         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-//         daoAuthenticationProvider.setUserDetailsService(ourUserDetailsService);
+//         daoAuthenticationProvider.setUserDetailsService(customUserDetailsService);
 //         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 //         return daoAuthenticationProvider;
 //     }

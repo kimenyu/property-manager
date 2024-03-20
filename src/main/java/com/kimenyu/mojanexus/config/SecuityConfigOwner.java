@@ -31,6 +31,26 @@ public class SecuityConfigOwner {
     @Autowired
     private JwtOwnerFilter jwtAuthFIlter;
 
+    @Autowired
+    private JWTAuthFIlter jwUser;
+
+    @Bean
+    public SecurityFilterChain UsersecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**", "/public/**", "/list-blogs/**").permitAll()
+                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAnyAuthority("USER")
+                        .requestMatchers("/adminuser/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/create-blog/**").hasAnyAuthority("ADMIN")
+                        .anyRequest().authenticated())
+                .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider()).addFilterBefore(
+                        jwUser, UsernamePasswordAuthenticationFilter.class
+                );
+        return httpSecurity.build();
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)

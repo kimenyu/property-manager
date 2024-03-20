@@ -15,35 +15,25 @@
 #   "password": "ownerpassword"
 # }
 
-POST http://localhost:8080/auth/signin
-Content-Type: application/json
-
-{
-  "username": "tenant",
-  "password": "ownerpassword"
-}
-
-# POST http://localhost:8080/api/lease/assign
+# POST http://localhost:8080/auth/signin
 # Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5hbnQiLCJpYXQiOjE3MTA5MTgzNDQsImV4cCI6MTcxMTAwNDc0NH0._toHoMi_xGNSfTvTk-sdPmfLbm1QeG3qLCpN-EUU3AE
 
 # {
-#   "apartmentId": 1,
-#   "startDate": "2024-04-20",
-#   "endDate": "2025-01-01"
+#   "username": "tenant",
+#   "password": "ownerpassword"
 # }
 
-# POST http://localhost:8080/api/lease/create
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5hbnQiLCJpYXQiOjE3MTA4NTYyMzgsImV4cCI6MTcxMDk0MjYzOH0.P5bGufj5_vjp9Iad9ypwBrhejVuHA9RrnozRxRE5O2Q
-  
-#   {
-#     "startDate": "2021-01-01",
-#     "endDate": "2021-12-31",
-#     "amount": 5000.0,
-#     "propertyId": 1,
-#     "tenantId": 2
-#   }
+POST http://localhost:8080/api/lease/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5hbnQiLCJpYXQiOjE3MTA5NjQxNTQsImV4cCI6MTcxMTA1MDU1NH0.XxPBrKrjZ8JM1HJOP9bNmpeezVKOWEJReLH8r-C7wrI
+
+{
+  "apartmentId": 2,
+  "startDate": "2024-04-20",
+  "endDate": "2025-01-01"
+}
+
+
 
 # DELETE http://localhost:8080/api/property/delete/property/3
 # Content-Type: application/json
@@ -52,7 +42,7 @@ Content-Type: application/json
 
 # POST http://localhost:8080/api/property/create
 # Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDkxNzU2MywiZXhwIjoxNzExMDAzOTYzfQ.0Ey9OKzJicy97ZjLDnOacDGxSyFzfWf2qBBQG3rw2xs
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDk0ODkwOSwiZXhwIjoxNzExMDM1MzA5fQ.3ibn8QxxQaqxG3ZxEViQYs4wAxk0ysk1fn5V9QoxC5c
 
 # {
 #   "name": "House for owner",
@@ -66,13 +56,12 @@ Content-Type: application/json
 
 # POST http://localhost:8080/api/apartment/create
 # Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDkxNzU2MywiZXhwIjoxNzExMDAzOTYzfQ.0Ey9OKzJicy97ZjLDnOacDGxSyFzfWf2qBBQG3rw2xs
-
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lciIsImlhdCI6MTcxMDk2MTk5OSwiZXhwIjoxNzExMDQ4Mzk5fQ.NDFsmhLTG8owZCST6OJMNcVguvO3fKAMjdZj9VLBH-M"
 
 # {
 #   "apartmentType": "ONE_BEDROOM",
 #   "size": 50.0,
-#   "rent": 7500.0,
+#   "rent": 117500.0,
 #   "apartmentImageUrl": "https://example.com/image.jpg",
 #   "propertyId": 1,
 #   "isAvailable" : true
