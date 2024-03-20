@@ -11,9 +11,6 @@ public class Lease {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "property_id")
-    private Property property;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
@@ -53,7 +50,6 @@ public class Lease {
     public String toString() {
         return "Lease{" +
                 "id=" + id +
-                ", property=" + property +
                 ", user=" + user +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
@@ -87,13 +83,6 @@ public class Lease {
         this.id = id;
     }
 
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
 
     public User getUser() {
         return user;

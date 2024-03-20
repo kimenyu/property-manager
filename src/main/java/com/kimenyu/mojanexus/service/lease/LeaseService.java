@@ -9,8 +9,6 @@ import com.kimenyu.mojanexus.entity.User;
 
 public interface LeaseService {
 
-    User getAuthenticatedUserByUsername(String authenticatedOwnerUsername);
-
-    String assignApartmentAndCreateLease(User authenticatedUser, LeaseDto leaseDto);
+    Lease createLeaseForUser(User currentUser, LeaseDto leaseDto);
 
 }

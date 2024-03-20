@@ -27,7 +27,7 @@ public class JwtOwnerFilter extends OncePerRequestFilter {
     private JWTUtilsOwner jwtUtils;
     
     @Autowired
-    private OwnerDetailService ourUserDetailsService;
+    private OwnerDetailService owneService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -41,7 +41,7 @@ public class JwtOwnerFilter extends OncePerRequestFilter {
         jwtToken = authHeader.substring(7);
         username = jwtUtils.extractUsername(jwtToken);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = ourUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = owneService.loadUserByUsername(username);
 
             if (jwtUtils.isTokenValid(jwtToken, userDetails)) {
                 SecurityContext securityContext = SecurityContextHolder.createEmptyContext();

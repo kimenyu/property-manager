@@ -25,7 +25,13 @@ Content-Type: application/json
 
 # POST http://localhost:8080/api/lease/assign
 # Content-Type: application/json
-# Authorization: Bearer 
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5hbnQiLCJpYXQiOjE3MTA5MTgzNDQsImV4cCI6MTcxMTAwNDc0NH0._toHoMi_xGNSfTvTk-sdPmfLbm1QeG3qLCpN-EUU3AE
+
+# {
+#   "apartmentId": 1,
+#   "startDate": "2024-04-20",
+#   "endDate": "2025-01-01"
+# }
 
 # POST http://localhost:8080/api/lease/create
 # Content-Type: application/json

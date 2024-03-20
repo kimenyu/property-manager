@@ -35,41 +35,29 @@ public class LeaseServiceImplementation implements LeaseService {
     private UserRepository userRepository;
 
     @Override
-    public User getAuthenticatedUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    @Override
-    public String assignApartmentAndCreateLease(User authenticatedUser, LeaseDto leaseDto) {
-        Long apartmentId = leaseDto.getApartmentId();
-        Optional<Apartment> optionalApartment = apartmentRepository.findById(apartmentId);
-
-        if (optionalApartment.isEmpty()) {
-            throw new ApartmentNotAvailableException("Apartment not found with id: " + apartmentId);
-        }
-
-        Apartment apartment = optionalApartment.get();
+    public Lease createLeaseForUser(User currentUser, LeaseDto leaseDto) {
+        Apartment apartment = apartmentRepository.findById(leaseDto.getApartmentId())
+                .orElseThrow(() -> new IllegalArgumentException("Apartment not found"));
 
         if (!apartment.getIsAvailable()) {
-            throw new ApartmentNotAvailableException("Apartment is not available for assignment.");
+            throw new IllegalStateException("Apartment is not available for lease.");
         }
 
-        apartment.assignToUser(authenticatedUser); // Assign apartment to the user if available
-
-        // Create a new lease
         Lease lease = new Lease();
-        lease.setUser(authenticatedUser);
+        lease.setUser(currentUser);
         lease.setApartment(apartment);
         lease.setStartDate(leaseDto.getStartDate());
-        lease.setEndDate(leaseDto.getEndDate());
-        lease.calculateTotalRent();
 
+        // Update apartment availability
+        apartment.setIsAvailable(false);
+        apartmentRepository.save(apartment);
+
+        // Save the lease
         leaseRepository.save(lease);
 
-        return "Apartment assigned and lease created successfully.";
+        return lease;
     }
 
-
-
+    
     
 }
